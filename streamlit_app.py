@@ -34,7 +34,6 @@ df = df[df['Type'] == type_choice]
 card = sorted(list(df['Card'].drop_duplicates()))
 card_choice = st.selectbox('Filter on a card', card)
 df = df[df['Card'] == card_choice]
-desc_df = df.drop(['Type', 'Card', 'Rules'], axis=1)
-st.table(desc_df)
-rules_df = df.drop(['Type', 'Card', 'Description'], axis=1)
-st.table(rules_df)
+df = df.drop(['Type', 'Card'], axis=1)
+display_df = df.transpose()
+st.table(display_df)
