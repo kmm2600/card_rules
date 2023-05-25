@@ -15,6 +15,17 @@ def load_data(sheets_url):
 
 df = load_data(st.secrets["public_gsheets_url"])
 
+# CSS to inject contained in a string
+hide_table_row_index = """
+        <style>
+        thead tr th:first-child {display:none}
+        tbody th {display:none}
+        </style>
+        """
+        
+# Inject CSS with Markdown
+st.markdown(hide_table_row_index, unsafe_allow_html=True)
+
 st.title("Oh Snap! Card Rules")
 
 type = sorted(list(df['Type'].drop_duplicates()))
@@ -24,8 +35,6 @@ card = sorted(list(df['Card'].drop_duplicates()))
 card_choice = st.selectbox('Filter on a card', card)
 df = df[df['Card'] == card_choice]
 desc_df = df.drop(['Type', 'Card', 'Rules'], axis=1)
-st.write("Description")
-st.write(desc_df)
+st.table(desc_df)
 rules_df = df.drop(['Type', 'Card', 'Description'], axis=1)
-st.write("Rules")
-st.write(rules_df)
+st.table(rules_df)
