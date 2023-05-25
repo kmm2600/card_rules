@@ -25,4 +25,5 @@ card_choice = st.selectbox('Filter on a card', card)
 df = df[df['Card'] == card_choice]
 df = df.drop(['Type', 'Card'], axis=1)
 display_df = df.transpose()
-st.table(display_df)
+display_df.hide_columns()
+st.write(display_df.to_html(), unsafe_allow_html=True)
