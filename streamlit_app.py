@@ -23,7 +23,7 @@ df = df[df['Type'] == type_choice]
 card = sorted(list(df['Card'].drop_duplicates()))
 card_choice = st.selectbox('Filter on a card', card)
 df = df[df['Card'] == card_choice]
-df = df.drop(df.index[0])
 df = df.drop(['Type', 'Card'], axis=1)
+df = df.set_index('Description',inplace=True)
 display_df = df.transpose()
 st.table(display_df)
