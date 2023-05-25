@@ -39,7 +39,7 @@ df = load_data(st.secrets["public_gsheets_url"])
 st.title("Oh Snap! Card Rules")
 
 type = sorted(list(df['Type'].drop_duplicates()))
-type_choice = st.selectbox('Filter on a card type', type)
+type_choice = st.radio('Filter on a card type', type)
 df = df[df['Type'] == type_choice]
 card = sorted(list(df['Card'].drop_duplicates()))
 card_choice = st.selectbox('Filter on a card', card)
