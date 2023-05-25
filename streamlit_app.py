@@ -35,4 +35,4 @@ card = sorted(list(df['Card'].drop_duplicates()))
 card_choice = st.selectbox('Filter on a card', card)
 df = df[df['Card'] == card_choice]
 df = df.drop(['Type', 'Card', 'Description'], axis=1)
-st.table(display_df)
+st.table(df)
